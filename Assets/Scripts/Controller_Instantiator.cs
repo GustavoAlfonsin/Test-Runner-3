@@ -10,7 +10,7 @@ public class Controller_Instantiator : MonoBehaviour
 
     void Start()
     {
-        Controller_Enemy.enemyVelocity = 2;
+        Controller_Enemy.enemyVelocity = 2; //Establece la velocidad de los enemigos en 2
     }
 
     void Update()
@@ -25,7 +25,7 @@ public class Controller_Instantiator : MonoBehaviour
         Controller_Enemy.enemyVelocity = Mathf.SmoothStep(1f, 15f, time / 45f);
     }
 
-    private void SpawnEnemies()
+    private void SpawnEnemies() // Funcion para hacer que aparescan enemigos en un intervalo de tiempo
     {
         respawningTimer -= Time.deltaTime;
 

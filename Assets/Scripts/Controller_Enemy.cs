@@ -16,7 +16,7 @@ public class Controller_Enemy : MonoBehaviour
         OutOfBounds();
     }
 
-    public void OutOfBounds()
+    public void OutOfBounds() // Destruye el objeto enemigo si la posicion en x es -15
     {
         if (this.transform.position.x <= -15)
         {

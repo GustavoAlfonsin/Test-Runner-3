@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Controller_Hud : MonoBehaviour
 {
-    public static bool gameOver = false;
+    public static bool gameOver = false; 
     public Text distanceText;
     public Text gameOverText;
     private float distance = 0;
@@ -18,7 +18,7 @@ public class Controller_Hud : MonoBehaviour
 
     void Update()
     {
-        if (gameOver)
+        if (gameOver) // Si el juego se acabo muestra los resultados en la pantalla 
         {
             Time.timeScale = 0;
             gameOverText.text = "Game Over \n Total Distance: " + distance.ToString();

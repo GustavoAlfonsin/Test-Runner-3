@@ -19,7 +19,7 @@ public class Controller_Player : MonoBehaviour
         GetInput();
     }
 
-    private void GetInput()
+    private void GetInput() //Funcion que detecta cuando el juegador realiza las distintas acciones
     {
         Jump();
         Duck();
@@ -42,7 +42,7 @@ public class Controller_Player : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.S))
             {
-                if (i == 0)
+                if (i == 0) // Si i es igual a 0 divide a la mitad la escala del objeto en y
                 {
                     rb.transform.localScale = new Vector3(rb.transform.localScale.x, rb.transform.localScale.y / 2, rb.transform.localScale.z);
                     i++;
@@ -50,7 +50,7 @@ public class Controller_Player : MonoBehaviour
             }
             else
             {
-                if (rb.transform.localScale.y != initialSize)
+                if (rb.transform.localScale.y != initialSize) // Si la escala en y no es igual a la escala original recetea el tamaño en y y pone i en 0
                 {
                     rb.transform.localScale = new Vector3(rb.transform.localScale.x, initialSize, rb.transform.localScale.z);
                     i = 0;
@@ -59,7 +59,7 @@ public class Controller_Player : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S)) // Si el objeto esta saltando al apretar la tecla s realiza un impulso hacia abajo
             {
                 rb.AddForce(new Vector3(0, -jumpForce, 0), ForceMode.Impulse);
             }
@@ -68,21 +68,21 @@ public class Controller_Player : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")) // Si entre en contacto con un enemigo destruye al jugador y activa el gameover
         {
             Destroy(this.gameObject);
             Controller_Hud.gameOver = true;
         }
 
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor")) // Marca cuando el juegador esta tocando el suelo
         {
             floored = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision) // Marca si el jugador dejo de tocar el suelo
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (collision.gameObject.CompareTag("Floor")) 
         {
             floored = false;
         }
