@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class Controller_Player : MonoBehaviour
     private int i = 0;
     private bool floored;
 
+    public GameObject bala;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         initialSize = rb.transform.localScale.y;
+        ControlBala.velocidadBala = 2;
     }
 
     void Update()
@@ -23,6 +27,7 @@ public class Controller_Player : MonoBehaviour
     {
         Jump();
         Duck();
+        shoot();
     }
 
     private void Jump()
@@ -66,12 +71,20 @@ public class Controller_Player : MonoBehaviour
         }
     }
 
+    private void shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Instantiate(bala, rb.position, rb.rotation);
+        }
+    }
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy")) // Si entre en contacto con un enemigo destruye al jugador y activa el gameover
         {
             Destroy(this.gameObject);
             Controller_Hud.gameOver = true;
+            
         }
 
         if (collision.gameObject.CompareTag("Floor")) // Marca cuando el juegador esta tocando el suelo

@@ -20,4 +20,9 @@ public class Parallax : MonoBehaviour
             transform.localPosition = new Vector3(20, transform.localPosition.y, transform.localPosition.z);
         }
     }
+
+    public void detenerParallax()
+    {
+        parallaxEffect = 0;
+    }
 }

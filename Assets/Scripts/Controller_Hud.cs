@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Controller_Hud : MonoBehaviour
@@ -27,6 +28,7 @@ public class Controller_Hud : MonoBehaviour
         else
         {
             distance += Time.deltaTime;
+            distance = (float)(Math.Round(distance * 100.0f) * 0.01f);
             distanceText.text = distance.ToString();
         }
     }
