@@ -12,12 +12,13 @@ public class Controller_Instantiator : MonoBehaviour
 
     void Start()
     {
-        Controller_Enemy.enemyVelocity = 2; //Establece la velocidad de los enemigos en 2
+        Controller_Enemy.enemyVelocity = 1.5f; //Establece la velocidad de los enemigos en 2
     }
 
     void Update()
     {
         SpawnEnemies();
+        SpawnPowerUps();
         ChangeVelocity();
     }
 
@@ -30,21 +31,25 @@ public class Controller_Instantiator : MonoBehaviour
     private void SpawnEnemies() // Funcion para hacer que aparescan enemigos en un intervalo de tiempo
     {
         respawningTimer -= Time.deltaTime;
-        timerPowerUps -= Time.deltaTime;
-
         if (respawningTimer <= 0)
         {
+             Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)], instantiatePos.transform);
+             respawningTimer = UnityEngine.Random.Range(2, 6);
             if (timerPowerUps <= 0)
             {
-                Instantiate(powerUP, instantiatePos.transform);
-                timerPowerUps = UnityEngine.Random.Range(2, 5) * 10;
-                respawningTimer = 3;
+                timerPowerUps = 1;
             }
-            else
-            {
-                Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)], instantiatePos.transform);
-                respawningTimer = UnityEngine.Random.Range(2, 6);
-            }
+        }
+    }
+
+    private void SpawnPowerUps()
+    {
+        timerPowerUps -= Time.deltaTime;
+        if (timerPowerUps <= 0)
+        {
+            Instantiate(powerUP, instantiatePos.transform);
+            timerPowerUps = UnityEngine.Random.Range(2, 5) * 10;
+               
         }
     }
 }
