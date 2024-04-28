@@ -8,6 +8,10 @@ public class Controller_Player : MonoBehaviour
     private float initialSize;
     private int i = 0;
     private bool floored;
+    public static bool invencible;
+    public float timePowerUp;
+    public Material colorbase;
+    public Material colorPowerUp;
 
     public GameObject bala;
 
@@ -15,12 +19,14 @@ public class Controller_Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         initialSize = rb.transform.localScale.y;
-        ControlBala.velocidadBala = 2;
+        ControlBala.velocidadBala = 5;
+        invencible = false;
     }
 
     void Update()
     {
         GetInput();
+        controPowerUp();
     }
 
     private void GetInput() //Funcion que detecta cuando el juegador realiza las distintas acciones
@@ -80,11 +86,25 @@ public class Controller_Player : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) // Si entre en contacto con un enemigo destruye al jugador y activa el gameover
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("BigEnemy")) // Si entre en contacto con un enemigo destruye al jugador y activa el gameover
         {
-            Destroy(this.gameObject);
-            Controller_Hud.gameOver = true;
-            
+            if (invencible)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+                Controller_Hud.gameOver = true;
+            }
+        }
+
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(collision.gameObject);
+            invencible = true;
+            timePowerUp = 15;
+            rb.GetComponent<MeshRenderer>().material = colorPowerUp;
         }
 
         if (collision.gameObject.CompareTag("Floor")) // Marca cuando el juegador esta tocando el suelo
@@ -98,6 +118,20 @@ public class Controller_Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Floor")) 
         {
             floored = false;
+        }
+    }
+
+    private void controPowerUp()
+    {
+        if (invencible)
+        {
+            timePowerUp -= Time.deltaTime;
+            if (timePowerUp <= 0)
+            {
+                invencible = false;
+                rb.GetComponent<MeshRenderer>().material = colorbase;
+                timePowerUp = 15;
+            }
         }
     }
 }

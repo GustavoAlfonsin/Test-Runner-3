@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Limit
   - BigEnemy
+  - PowerUp
   layers:
   - Default
   - TransparentFX

@@ -4,8 +4,10 @@ using UnityEngine;
 public class Controller_Instantiator : MonoBehaviour
 {
     public List<GameObject> enemies;
+    public GameObject powerUP;
     public GameObject instantiatePos;
     public float respawningTimer;
+    public float timerPowerUps = 15;
     private float time = 0;
 
     void Start()
@@ -28,11 +30,21 @@ public class Controller_Instantiator : MonoBehaviour
     private void SpawnEnemies() // Funcion para hacer que aparescan enemigos en un intervalo de tiempo
     {
         respawningTimer -= Time.deltaTime;
+        timerPowerUps -= Time.deltaTime;
 
         if (respawningTimer <= 0)
         {
-            Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)], instantiatePos.transform);
-            respawningTimer = UnityEngine.Random.Range(2, 6);
+            if (timerPowerUps <= 0)
+            {
+                Instantiate(powerUP, instantiatePos.transform);
+                timerPowerUps = UnityEngine.Random.Range(2, 5) * 10;
+                respawningTimer = 3;
+            }
+            else
+            {
+                Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)], instantiatePos.transform);
+                respawningTimer = UnityEngine.Random.Range(2, 6);
+            }
         }
     }
 }

@@ -396,8 +396,11 @@ MonoBehaviour:
   - {fileID: 4362255490418720725, guid: 10839c286a1f27947bc1fa05aee0bfdb, type: 3}
   - {fileID: 9145002132079440597, guid: 0e6260b13f6e84c47b94dd28da588bcd, type: 3}
   - {fileID: 6100051389430861537, guid: ca2da7e8b3e0189428b0a6245d4e4121, type: 3}
+  - {fileID: 4202779186113501076, guid: ef3c74bade06af042a7b353df9e015c4, type: 3}
+  powerUP: {fileID: 2774114352569021944, guid: b42d60241ef890543a7989f3d3b12672, type: 3}
   instantiatePos: {fileID: 432534838}
   respawningTimer: 0
+  timerPowerUps: 15
 --- !u!4 &432534840
 Transform:
   m_ObjectHideFlags: 0
@@ -1157,6 +1160,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
+  timePowerUp: 0
+  colorbase: {fileID: 2100000, guid: a9b7c58395af0eb43bb9030124bca9af, type: 2}
+  colorPowerUp: {fileID: 2100000, guid: aa514c6bfe61ebd4b949ba92238fce54, type: 2}
   bala: {fileID: 2171156830640715686, guid: 277bfa7bb330228438e4eb8273821864, type: 3}
 --- !u!54 &1018040025
 Rigidbody:

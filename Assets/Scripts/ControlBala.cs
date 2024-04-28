@@ -26,16 +26,15 @@ public class ControlBala : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Enemy")) 
+        if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(this.gameObject);
         }
-        else if (collision.gameObject.CompareTag("BigEnemy"))
+        else if (other.gameObject.CompareTag("BigEnemy"))
         {
-            Destroy(collision.gameObject);
+            Destroy(other.gameObject);
             Destroy(this.gameObject);
         }
     }
