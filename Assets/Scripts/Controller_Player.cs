@@ -12,6 +12,8 @@ public class Controller_Player : MonoBehaviour
     public float timePowerUp;
     public Material colorbase;
     public Material colorPowerUp;
+    [SerializeField] private AudioClip sonido_disparo;
+    [SerializeField] private AudioClip sonido_salto;
 
     public GameObject bala;
 
@@ -43,6 +45,7 @@ public class Controller_Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.W))
             {
                 rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+                Controlador_sonidos.instance.ejecutarSonido(sonido_salto);
             }
         }
     }
@@ -82,6 +85,7 @@ public class Controller_Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Instantiate(bala, rb.position, rb.rotation);
+            Controlador_sonidos.instance.ejecutarSonido(sonido_disparo);
         }
     }
     public void OnCollisionEnter(Collision collision)
