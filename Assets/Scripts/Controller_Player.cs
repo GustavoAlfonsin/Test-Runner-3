@@ -14,6 +14,7 @@ public class Controller_Player : MonoBehaviour
     public Material colorPowerUp;
     [SerializeField] private AudioClip sonido_disparo;
     [SerializeField] private AudioClip sonido_salto;
+    [SerializeField] private AudioSource musica;
 
     public GameObject bala;
 
@@ -23,6 +24,7 @@ public class Controller_Player : MonoBehaviour
         initialSize = rb.transform.localScale.y;
         ControlBala.velocidadBala = 5;
         invencible = false;
+        musica.Play();
     }
 
     void Update()
@@ -98,6 +100,7 @@ public class Controller_Player : MonoBehaviour
             }
             else
             {
+                musica.Stop();
                 Destroy(this.gameObject);
                 Controller_Hud.gameOver = true;
             }
